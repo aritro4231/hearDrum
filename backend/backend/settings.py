@@ -14,11 +14,15 @@ from pathlib import Path
 
 import os
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "")
-if ALLOWED_HOSTS:
-    ALLOWED_HOSTS = [h.strip() for h in ALLOWED_HOSTS.split(",") if h.strip()]
+# Always allow your Railway domain (safe + simple)
+DEFAULT_ALLOWED = ["heardrum-production.up.railway.app", "localhost", "127.0.0.1"]
+
+hosts = os.getenv("ALLOWED_HOSTS", "")
+if hosts:
+    ALLOWED_HOSTS = [h.strip() for h in hosts.split(",") if h.strip()]
 else:
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+    ALLOWED_HOSTS = DEFAULT_ALLOWED
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -133,7 +137,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "https://heardrumvercel.app/",
+    "https://heardrumvercel.app/"
 ]
 
 
