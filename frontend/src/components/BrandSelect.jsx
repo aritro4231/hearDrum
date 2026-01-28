@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./BrandSelect.css";
+import { getHeadphoneBrands } from "../api";
 
 export default function BrandSelect() {
   const [brands, setBrands] = useState([]);
@@ -16,13 +17,22 @@ export default function BrandSelect() {
       return;
     }
 
-    fetch(`http://127.0.0.1:8000/api/headphones/brands/?type=${listeningType}`)
-      .then((res) => res.json())
-      .then((data) => {
+    let isMounted = true;
+
+    (async () => {
+      try {
+        const data = await getHeadphoneBrands(listeningType);
+        if (!isMounted) return;
         setBrands(data.brands);
         setLoading(false);
-      })
-      .catch((err) => console.error(err));
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+
+    return () => {
+      isMounted = false;
+    };
   }, [listeningType, navigate]);
 
   const filteredBrands = brands.filter((b) =>

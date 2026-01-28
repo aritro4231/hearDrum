@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./BrandSelect.css"; // reusing styles
+import { getHeadphoneModels } from "../api";
 
 export default function ModelSelect() {
   const [models, setModels] = useState([]);
@@ -24,15 +25,22 @@ export default function ModelSelect() {
       return;
     }
 
-    fetch(
-      `http://127.0.0.1:8000/api/headphones/?brand=${brand}&type=${listeningType}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
+    let isMounted = true;
+
+    (async () => {
+      try {
+        const data = await getHeadphoneModels(brand, listeningType);
+        if (!isMounted) return;
         setModels(data.models || []);
         setLoading(false);
-      })
-      .catch((err) => console.error(err));
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+
+    return () => {
+      isMounted = false;
+    };
   }, [brand, listeningType, navigate]);
 
   const matchesListeningType = (m) => {
