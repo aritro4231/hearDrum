@@ -1,0 +1,109 @@
+.contact-section {
+  padding: 28px 8px 64px;
+}
+
+.contact-inner {
+  width: 100%;
+  max-width: 1020px;
+  margin: 0 auto;
+}
+
+.contact-heading {
+  margin-bottom: 24px;
+}
+
+.contact-title {
+  font-size: clamp(30px, 4.4vw, 40px);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: var(--spotify-green);
+}
+
+.contact-subtitle {
+  margin-top: 8px;
+  font-size: 16px;
+  color: var(--gray);
+}
+
+.contact-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  text-decoration: none;
+  color: inherit;
+  min-width: 0;
+  transition:
+    transform 180ms ease,
+    border-color 200ms ease,
+    background-color 200ms ease,
+    box-shadow 220ms ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(29, 185, 84, 0.55);
+  background: rgba(29, 185, 84, 0.08);
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.35);
+}
+
+.contact-icon {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(29, 185, 84, 0.14);
+  color: var(--spotify-green);
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.contact-card:hover .contact-icon {
+  background: var(--spotify-green);
+  color: #0a0a0a;
+}
+
+.contact-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.contact-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  color: var(--gray);
+}
+
+.contact-value {
+  font-size: 15px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  line-height: 1.25;
+}
+
+@media (max-width: 980px) {
+  .contact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}

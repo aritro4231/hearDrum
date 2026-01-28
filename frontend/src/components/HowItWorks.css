@@ -1,0 +1,20 @@
+.how-page {
+  text-align: center;
+  margin-top: 44px;
+  min-height: 70vh;
+  padding-bottom: 60px;
+}
+
+.how-title {
+  color: var(--spotify-green);
+  font-size: 36px;
+}
+
+.how-subtitle {
+  color: var(--gray);
+  font-size: 17px;
+  max-width: 760px;
+  margin: 8px auto 0 auto;
+  line-height: 1.6;
+}
+

@@ -1,0 +1,123 @@
+.about-page {
+  text-align: center;
+  margin-top: 44px;
+  min-height: 70vh;
+  padding-bottom: 60px;
+}
+
+.about-title {
+  color: var(--spotify-green);
+  font-size: 36px;
+}
+
+.about-card {
+  margin: 22px auto 0 auto;
+  max-width: 980px;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 28px;
+  align-items: center;
+  text-align: left;
+  padding: 26px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+}
+
+.about-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-photo-stack {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.about-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(29, 185, 84, 0.18), rgba(255, 255, 255, 0.04));
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  object-fit: cover;
+  display: block;
+}
+
+.about-badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.about-badge {
+  min-width: 130px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(29, 185, 84, 0.35);
+  background: rgba(29, 185, 84, 0.12);
+  color: var(--spotify-green);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  text-align: center;
+}
+
+.about-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-name {
+  margin-top: 2px;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--white);
+}
+
+.about-subtitle {
+  margin-top: 4px;
+  color: var(--spotify-green);
+  font-weight: 700;
+}
+
+.about-lead {
+  margin-top: 14px;
+  color: var(--gray);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.about-bullets {
+  margin-top: 12px;
+  color: var(--gray);
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+
+.about-bullets li::marker {
+  color: var(--spotify-green);
+}
+
+@media (max-width: 920px) {
+  .about-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .about-right {
+    align-items: center;
+  }
+
+  .about-bullets {
+    text-align: left;
+    max-width: 680px;
+  }
+}

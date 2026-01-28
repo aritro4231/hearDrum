@@ -1,0 +1,50 @@
+.results-container {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+.results-title {
+  color: var(--spotify-green);
+  margin-bottom: 28px;
+  text-align: center;
+  font-size: clamp(30px, 4.6vw, 40px);
+  font-weight: 700;
+}
+
+.results-info {
+  color: white;
+  margin: 6px 0;
+  font-size: 16px;
+}
+
+.results-highlight {
+  color: var(--spotify-green);
+}
+
+.results-card {
+  margin-top: 24px;
+  padding: 18px 20px;
+  border: 1px solid #222;
+  border-radius: 10px;
+  background: #0e0e0e;
+}
+
+.results-card-label {
+  color: var(--gray);
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.results-card-value {
+  color: var(--spotify-green);
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.results-footnote {
+  margin-top: 16px;
+  color: var(--gray);
+  font-size: 13px;
+}

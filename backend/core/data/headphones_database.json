@@ -1,0 +1,802 @@
+[
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Bose QuietComfort 35 II",
+    "type": "over-ear",
+    "connection": "both",
+    "max_dB_SPL_wired": "100 dB SPL @1mW",
+    "max_dB_SPL_bluetooth": "105 dB SPL",
+    "notes": "Hugely popular ANC travel headphone (2018)."
+  },
+  {
+    "name": "Bose Noise Cancelling Headphones 700",
+    "type": "over-ear",
+    "connection": "both",
+    "max_dB_SPL_wired": "100 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "105 dB SPL (est.)",
+    "notes": "Flagship Bose ANC model (2019)."
+  },
+  {
+    "name": "Sony WH-1000XM4",
+    "type": "over-ear",
+    "connection": "both",
+    "max_dB_SPL_wired": "115 dB SPL @1V \u2248 98 dB/mW",
+    "max_dB_SPL_bluetooth": "104\u2013105 dB SPL",
+    "notes": "Top-selling Sony ANC headphone (2020)."
+  },
+  {
+    "name": "Beats Studio3 Wireless",
+    "type": "over-ear",
+    "connection": "both",
+    "max_dB_SPL_wired": "100 dB/mW",
+    "max_dB_SPL_bluetooth": "104\u2013105 dB SPL (est.)",
+    "notes": "Popular bass-heavy ANC headphones (2017)."
+  },
+  {
+    "name": "Sennheiser Momentum 4 Wireless",
+    "type": "over-ear",
+    "connection": "both",
+    "max_dB_SPL_wired": "108.1 dB SPL @1V (~99 dB/mW)",
+    "max_dB_SPL_bluetooth": "100 dB SPL (est.)",
+    "notes": "Hi-fi ANC headphones (2022)."
+  },
+  {
+    "name": "Jabra Elite 85h",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "115 dB SPL @1V (~99 dB/mW)",
+    "max_dB_SPL_bluetooth": "104.6 dB SPL",
+    "notes": "Premium ANC (2019); good call quality."
+  },
+  {
+    "name": "Marshall Major III Bluetooth",
+    "type": "on-ear",
+    "connection": "both",
+    "max_dB_SPL_wired": "99\u2013100 dB SPL @1mW",
+    "max_dB_SPL_bluetooth": "100 dB SPL (est.)",
+    "notes": "Fashionable on-ear (2018)."
+  },
+  {
+    "name": "Anker Soundcore Life Q30",
+    "type": "over-ear",
+    "connection": "both",
+    "max_dB_SPL_wired": "95 dB/mW",
+    "max_dB_SPL_bluetooth": "102 dB SPL (est.)",
+    "notes": "Top-rated budget ANC (2020)."
+  },
+  {
+    "name": "Plantronics BackBeat Pro 2",
+    "type": "over-ear",
+    "connection": "both",
+    "max_dB_SPL_wired": "93 dB SPL @1mW",
+    "max_dB_SPL_bluetooth": "100 dB SPL (est.)",
+    "notes": "Versatile ANC (2016)."
+  },
+  {
+    "name": "Apple AirPods (2nd Gen)",
+    "type": "earbud",
+    "connection": "wireless",
+    "max_dB_SPL_wired": null,
+    "max_dB_SPL_bluetooth": "104 dB SPL (peak)",
+    "notes": "Iconic true wireless earbuds (2019)."
+  },
+  {
+    "name": "Apple AirPods Pro",
+    "type": "in-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": null,
+    "max_dB_SPL_bluetooth": "105 dB SPL (measured)",
+    "notes": "Popular noise-cancelling TWS earbuds (2019)."
+  },
+  {
+    "name": "Samsung Galaxy Buds Pro",
+    "type": "in-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": null,
+    "max_dB_SPL_bluetooth": "104 dB SPL (measured)",
+    "notes": "Premium ANC earbuds (2021)."
+  },
+  {
+    "name": "Sony WF-1000XM4",
+    "type": "in-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": null,
+    "max_dB_SPL_bluetooth": "104 dB SPL (est.)",
+    "notes": "Top-rated noise-cancelling earbuds (2021)."
+  },
+  {
+    "name": "Jabra Elite 75t",
+    "type": "in-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": null,
+    "max_dB_SPL_bluetooth": "102 dB SPL (est.)",
+    "notes": "Popular TWS (2019)."
+  },
+  {
+    "name": "Google Pixel Buds Pro",
+    "type": "in-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": null,
+    "max_dB_SPL_bluetooth": "103 dB SPL (measured)",
+    "notes": "Google flagship earbuds (2022)."
+  },
+  {
+    "name": "Sennheiser HD 600",
+    "type": "over-ear",
+    "connection": "wired",
+    "max_dB_SPL_wired": "100 dB SPL @1mW (300\u03a9)",
+    "max_dB_SPL_bluetooth": null,
+    "notes": "Legendary neutral audiophile headphone (1997)."
+  },
+  {
+    "name": "Sennheiser HD 650",
+    "type": "over-ear",
+    "connection": "wired",
+    "max_dB_SPL_wired": "100 dB SPL @1mW (300\u03a9)",
+    "max_dB_SPL_bluetooth": null,
+    "notes": "Successor to HD600 (2003)."
+  },
+  {
+    "name": "Beyerdynamic DT 770 Pro",
+    "type": "over-ear",
+    "connection": "wired",
+    "max_dB_SPL_wired": "96 dB SPL @1mW (80\u03a9)",
+    "max_dB_SPL_bluetooth": null,
+    "notes": "Studio classic closed-back (1985)."
+  },
+  {
+    "name": "Beyerdynamic DT 990 Pro",
+    "type": "over-ear",
+    "connection": "wired",
+    "max_dB_SPL_wired": "93 dB SPL @1mW (250\u03a9)",
+    "max_dB_SPL_bluetooth": null,
+    "notes": "Classic open-back (1985)."
+  },
+  {
+    "name": "Sony MDR-7506",
+    "type": "over-ear",
+    "connection": "wired",
+    "max_dB_SPL_wired": "104 dB SPL @1mW (63\u03a9)",
+    "max_dB_SPL_bluetooth": null,
+    "notes": "Iconic studio monitor headphone (1991)."
+  },
+  {
+    "name": "Audio-Technica ATH-M50x",
+    "type": "over-ear",
+    "connection": "wired",
+    "max_dB_SPL_wired": "100 dB SPL @1mW (38\u03a9)",
+    "max_dB_SPL_bluetooth": null,
+    "notes": "Extremely popular studio headphone (2014)."
+  },
+  {
+    "name": "HyperX Cloud II",
+    "type": "over-ear",
+    "connection": "wired",
+    "max_dB_SPL_wired": "98 dB SPL @1mW",
+    "max_dB_SPL_bluetooth": null,
+    "notes": "One of the most popular gaming headsets (2015)."
+  },
+  {
+    "name": "SteelSeries Arctis 7",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "98 dB SPL @1mW",
+    "max_dB_SPL_bluetooth": "100 dB SPL (est.)",
+    "notes": "Top-selling wireless gaming headset (2017)."
+  },
+  {
+    "name": "Logitech G Pro X",
+    "type": "over-ear",
+    "connection": "wired",
+    "max_dB_SPL_wired": "91 dB SPL @1mW (35\u03a9)",
+    "max_dB_SPL_bluetooth": null,
+    "notes": "Esports-focused headset (2019)."
+  },
+  {
+    "name": "Razer Kraken",
+    "type": "over-ear",
+    "connection": "wired",
+    "max_dB_SPL_wired": "109 dB SPL @1mW",
+    "max_dB_SPL_bluetooth": null,
+    "notes": "Mass-market gaming headset (2013)."
+  },
+  {
+    "name": "Astro A50",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": null,
+    "max_dB_SPL_bluetooth": "118 dB SPL (peak est.)",
+    "notes": "Premium wireless gaming headset (2012)."
+  },
+  {
+    "name": "Sony Walkman MDR-3L2",
+    "type": "on-ear",
+    "connection": "wired",
+    "max_dB_SPL_wired": "100 dB SPL (est.)",
+    "max_dB_SPL_bluetooth": null,
+    "notes": "Headphones bundled with first Walkman (1979)."
+  },
+  {
+    "name": "Sennheiser HD 414",
+    "type": "on-ear",
+    "connection": "wired",
+    "max_dB_SPL_wired": "94 dB SPL @1mW (2000\u03a9)",
+    "max_dB_SPL_bluetooth": null,
+    "notes": "First open-back headphones (1968)."
+  },
+  {
+    "name": "Koss Porta Pro",
+    "type": "on-ear",
+    "connection": "wired",
+    "max_dB_SPL_wired": "106 dB SPL @1mW (60\u03a9)",
+    "max_dB_SPL_bluetooth": null,
+    "notes": "Portable classic since 1984 with cult following."
+  },
+  {
+    "name": "Beats Studio (1st Gen)",
+    "type": "over-ear",
+    "connection": "both",
+    "max_dB_SPL_wired": "113 dB SPL (active)",
+    "max_dB_SPL_bluetooth": null,
+    "notes": "Launched Beats craze (2008)."
+  },
+  {
+    "name": "Sennheiser Orpheus HE-1",
+    "type": "over-ear",
+    "connection": "wired",
+    "max_dB_SPL_wired": "114 dB SPL (max)",
+    "max_dB_SPL_bluetooth": null,
+    "notes": "Ultra-luxury electrostatic system (2016)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  },
+  {
+    "name": "Apple AirPods Max",
+    "type": "over-ear",
+    "connection": "wireless",
+    "max_dB_SPL_wired": "99\u2013103 dB SPL @1mW (est.)",
+    "max_dB_SPL_bluetooth": "103 dB SPL",
+    "notes": "Premium ANC headphones; popular for seamless Apple integration (2020)."
+  }
+]

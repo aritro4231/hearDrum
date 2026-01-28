@@ -1,0 +1,64 @@
+.volume-container {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+.volume-title {
+  color: var(--spotify-green);
+  margin-bottom: 28px;
+  text-align: center;
+  font-size: clamp(30px, 4.6vw, 40px);
+  font-weight: 700;
+}
+
+.volume-info {
+  color: white;
+  margin: 6px 0;
+  font-size: 16px;
+}
+
+.volume-highlight {
+  color: var(--spotify-green);
+}
+
+.volume-slider-container {
+  margin-top: 30px;
+}
+
+.volume-slider-container p {
+  color: var(--spotify-green);
+  margin-bottom: 10px;
+}
+
+.volume-slider {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.estimated-db {
+  margin-top: 20px;
+  color: white;
+  font-size: 16px;
+}
+
+.next-button {
+  margin-top: 40px;
+  padding: 16px 22px;
+  width: 100%;
+  background: var(--spotify-green);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.next-button:hover {
+  opacity: 0.9;
+}
+
+.brand-select-overlay {
+  display: none !important;
+}
