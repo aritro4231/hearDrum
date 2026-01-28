@@ -1,6 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .utils import ALL_HEADPHONES
+from django.http import JsonResponse
+
 
 @api_view(["GET"])
 def list_devices(request):
@@ -59,4 +61,7 @@ def list_headphones(request):
             unique[m["name"]] = m  
 
     return Response({"models": list(unique.values())})
+
+def health(request):
+    return JsonResponse({"status": "ok"})
 
