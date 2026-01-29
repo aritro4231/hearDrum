@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/heardrum png.png";
+import logo from "../assets/heardrum.png";
 
 export default function Layout({ children }) {
   useEffect(() => {
