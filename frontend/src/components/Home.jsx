@@ -10,11 +10,11 @@ export default function Home() {
 
   const heroTitleStyle = {
     color: "var(--spotify-green)",
-    fontSize: "42px",
+    fontSize: "clamp(28px, 6vw, 42px)",
+    lineHeight: 1.15,
     marginBottom: "14px",
     position: "relative",
     zIndex: 1,
-    whiteSpace: "nowrap",
   };
 
   const heroSubtitleStyle = {
