@@ -1,4 +1,4 @@
-# 🥁 hearDrum
+# 🎧 hearDrum
 
 **hearDrum** helps headphone users understand how loud they're actually listening, and how long that volume is safe to sustain using the National Institute for Occupational Safety and Health's (NIOSH) noise exposure guidelines.
 
