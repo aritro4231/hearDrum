@@ -113,6 +113,11 @@ body {
   transform: translateY(-1px);
 }
 
+.navbar .nav-account {
+  color: var(--spotify-green);
+  background: rgba(29, 185, 84, 0.1);
+}
+
 .page-container {
   width: 100%;
   max-width: 900px;

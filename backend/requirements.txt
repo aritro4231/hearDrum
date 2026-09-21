@@ -5,3 +5,4 @@ asgiref==3.11.0
 sqlparse==0.5.3
 tzdata==2025.2
 gunicorn
+psycopg[binary]>=3.2,<4

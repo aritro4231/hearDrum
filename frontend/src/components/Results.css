@@ -48,3 +48,9 @@
   color: var(--gray);
   font-size: 13px;
 }
+
+.results-save-status {
+  margin-top: 14px;
+  color: var(--spotify-green);
+  font-size: 14px;
+}

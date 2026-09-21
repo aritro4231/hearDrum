@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { saveListeningSession } from "../api";
+import { useAuth } from "../auth/AuthContext";
 import "./Results.css";
 
 export default function Results() {
@@ -6,23 +8,19 @@ export default function Results() {
   const END_KEY = "safeEndAt";
   const volume = localStorage.getItem("listeningVolume");
   const estimatedDb = localStorage.getItem("estimatedDb");
+  const listeningType = localStorage.getItem("listeningType");
+  const modelData = JSON.parse(localStorage.getItem("selectedModel") || "null");
+  const { isAuthenticated, token } = useAuth();
 
   const volumeNumber = Number(volume);
   const dbNumber = Number(estimatedDb);
-
-  if (!Number.isFinite(volumeNumber) || !Number.isFinite(dbNumber)) {
-    return (
-      <p className="results-info">
-        Missing volume data. Please go back and set your volume.
-      </p>
-    );
-  }
-
   const safeMinutes = Math.round(480 * Math.pow(2, (85 - dbNumber) / 3));
   const initialSeconds = Math.max(0, safeMinutes * 60);
   const [remainingSeconds, setRemainingSeconds] = useState(initialSeconds);
+  const [saveStatus, setSaveStatus] = useState("");
 
   useEffect(() => {
+    if (!Number.isFinite(initialSeconds)) return;
     setRemainingSeconds(initialSeconds);
     const endAt = Date.now() + initialSeconds * 1000;
     localStorage.setItem(END_KEY, String(endAt));
@@ -30,7 +28,7 @@ export default function Results() {
   }, [initialSeconds]);
 
   useEffect(() => {
-    if (remainingSeconds <= 0) return;
+    if (!Number.isFinite(remainingSeconds) || remainingSeconds <= 0) return;
     const timer = setInterval(() => {
       setRemainingSeconds((prev) => {
         if (prev <= 1) {
@@ -44,6 +42,69 @@ export default function Results() {
     }, 1000);
     return () => clearInterval(timer);
   }, [remainingSeconds]);
+
+  useEffect(() => {
+    if (
+      !isAuthenticated ||
+      !token ||
+      !modelData?.name ||
+      !listeningType ||
+      !Number.isFinite(volumeNumber) ||
+      !Number.isFinite(dbNumber) ||
+      !Number.isFinite(safeMinutes)
+    ) {
+      return;
+    }
+
+    const saveKey = [
+      "savedSession",
+      modelData.name,
+      listeningType,
+      volumeNumber,
+      dbNumber,
+      safeMinutes,
+    ].join(":");
+
+    if (sessionStorage.getItem(saveKey) === "1") return;
+
+    let isMounted = true;
+
+    (async () => {
+      try {
+        await saveListeningSession(token, {
+          headphone_name: modelData.name,
+          connection_type: listeningType,
+          volume_percent: volumeNumber,
+          estimated_db: dbNumber,
+          duration_minutes: Math.max(1, safeMinutes),
+        });
+        sessionStorage.setItem(saveKey, "1");
+        if (isMounted) setSaveStatus("Saved to your account.");
+      } catch {
+        if (isMounted) setSaveStatus("Could not save this session.");
+      }
+    })();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [
+    dbNumber,
+    isAuthenticated,
+    listeningType,
+    modelData?.name,
+    safeMinutes,
+    token,
+    volumeNumber,
+  ]);
+
+  if (!Number.isFinite(volumeNumber) || !Number.isFinite(dbNumber)) {
+    return (
+      <p className="results-info">
+        Missing volume data. Please go back and set your volume.
+      </p>
+    );
+  }
 
   const safeHours = Math.floor(remainingSeconds / 3600);
   const safeMinsOnly = Math.floor((remainingSeconds % 3600) / 60);
@@ -72,6 +133,8 @@ export default function Results() {
       <p className="results-footnote">
         Based on NIOSH Recommended Exposure Limit: 85 dB = 8 hours, every +3 dB halves time.
       </p>
+
+      {saveStatus && <p className="results-save-status">{saveStatus}</p>}
     </div>
   );
 }

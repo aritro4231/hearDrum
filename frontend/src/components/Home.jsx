@@ -1,11 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext";
 
 export default function Home() {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   const start = () => {
-    navigate("/listening-type");
+    if (isAuthenticated) {
+      navigate("/listening-type");
+      return;
+    }
+
+    navigate("/auth", { state: { redirectTo: "/listening-type" } });
   };
 
   const heroTitleStyle = {
