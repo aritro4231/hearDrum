@@ -9,6 +9,8 @@ import Results from "./components/Results.jsx";
 import HowItWorks from "./components/HowItWorks.jsx";
 import AboutUs from "./components/AboutUs.jsx";
 import Contact from "./components/Contact.jsx";
+import Auth from "./components/Auth.jsx";
+import Dashboard from "./components/Dashboard.jsx";
 
 export default function App() {
   return (
@@ -23,6 +25,8 @@ export default function App() {
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Layout>
   );

@@ -1,0 +1,96 @@
+.dashboard-page {
+  width: 100%;
+  max-width: 860px;
+  margin: 24px auto 0;
+  padding-bottom: 70px;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.dashboard-title {
+  color: var(--spotify-green);
+  font-size: clamp(30px, 5vw, 40px);
+  margin-bottom: 4px;
+}
+
+.dashboard-copy,
+.dashboard-muted,
+.dashboard-empty,
+.session-card p {
+  color: var(--gray);
+}
+
+.dashboard-logout {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--white);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 11px 18px;
+}
+
+.dashboard-logout:hover {
+  border-color: rgba(29, 185, 84, 0.5);
+  color: var(--spotify-green);
+}
+
+.dashboard-error {
+  color: #ff8f8f;
+}
+
+.dashboard-empty,
+.session-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: #0e0e0e;
+  padding: 18px 20px;
+}
+
+.session-list {
+  display: grid;
+  gap: 14px;
+}
+
+.session-card h2 {
+  color: var(--white);
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.session-card dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.session-card dt {
+  color: var(--gray);
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.session-card dd {
+  color: var(--spotify-green);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+@media (max-width: 680px) {
+  .dashboard-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .session-card dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

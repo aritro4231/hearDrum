@@ -1,0 +1,104 @@
+.auth-page {
+  width: 100%;
+  max-width: 520px;
+  margin: 28px auto 0;
+  padding-bottom: 70px;
+}
+
+.auth-panel {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+.auth-tabs {
+  display: inline-flex;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 999px;
+  background: #0f0f0f;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 24px;
+}
+
+.auth-tab {
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 16px;
+  color: var(--gray);
+  background: transparent;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.auth-tab.active {
+  color: #000;
+  background: var(--spotify-green);
+}
+
+.auth-title {
+  color: var(--spotify-green);
+  font-size: clamp(30px, 5vw, 40px);
+  margin-bottom: 8px;
+}
+
+.auth-copy {
+  color: var(--gray);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+.auth-form {
+  display: grid;
+  gap: 15px;
+}
+
+.auth-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.auth-form input {
+  width: 100%;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #111;
+  color: var(--white);
+  font-size: 16px;
+  outline: none;
+  padding: 14px 15px;
+}
+
+.auth-form input:focus {
+  border-color: var(--spotify-green);
+  box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.12);
+}
+
+.auth-error {
+  color: #ff8f8f;
+  font-size: 14px;
+}
+
+.auth-submit {
+  border: 0;
+  border-radius: 999px;
+  background: var(--spotify-green);
+  color: #000;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 800;
+  padding: 14px 22px;
+}
+
+.auth-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}

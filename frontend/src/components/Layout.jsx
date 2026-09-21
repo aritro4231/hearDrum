@@ -1,8 +1,11 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/heardrum.png";
+import { useAuth } from "../auth/AuthContext";
 
 export default function Layout({ children }) {
+  const { isAuthenticated, user } = useAuth();
+
   useEffect(() => {
     const ALERT_KEY = "safeAlertedAt";
     const END_KEY = "safeEndAt";
@@ -97,6 +100,13 @@ export default function Layout({ children }) {
           <Link to="/how-it-works">How it works</Link>
           <Link to="/about-us">About us</Link>
           <Link to="/contact">Contact</Link>
+          {isAuthenticated ? (
+            <Link to="/dashboard" className="nav-account">
+              {user?.username || "Account"}
+            </Link>
+          ) : (
+            <Link to="/auth">Log In / Sign Up</Link>
+          )}
         </nav>
       </header>
 
