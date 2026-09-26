@@ -1,0 +1,14 @@
+data/
+ml/artifacts/
+backend/core/ml/models/*.pt
+backend/core/ml/models/*.pth
+backend/core/ml/models/*.ckpt
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.log
+Lib/
+Scripts/
+share/

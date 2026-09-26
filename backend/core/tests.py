@@ -1,9 +1,15 @@
 from unittest.mock import patch
 
-from django.contrib.auth import get_user_model
-from django.test import TestCase
-from rest_framework.authtoken.models import Token
+import tempfile
 
+from django.contrib.auth import get_user_model
+from django.test import SimpleTestCase, TestCase
+from rest_framework.authtoken.models import Token
+import torch
+
+from .ml.features import AudioPreprocessConfig, LogMelFeatureExtractor
+from .ml.inference import EnvironmentAudioClassifier
+from .ml.model import AmbientCNN
 from .models import Headphone, ListeningSession
 
 User = get_user_model()
@@ -300,3 +306,55 @@ class ListeningSessionApiTests(TestCase):
 
         self.assertEqual(response.status_code, 400)
         self.assertIn("headphone", response.json())
+
+
+class EnvironmentalAudioMlTests(SimpleTestCase):
+    def test_preprocessing_output_shape(self):
+        config = AudioPreprocessConfig(sample_rate=8000, duration_seconds=1.0, n_mels=32)
+        extractor = LogMelFeatureExtractor(config)
+        waveform = torch.randn(2, config.num_samples // 2)
+
+        features = extractor.extract(waveform, sample_rate=8000)
+
+        self.assertEqual(features.shape, (1, 32, config.expected_frames))
+
+    def test_model_output_dimensions(self):
+        model = AmbientCNN(num_classes=10)
+        logits = model(torch.randn(4, 1, 64, 173))
+
+        self.assertEqual(logits.shape, (4, 10))
+
+    def test_checkpoint_loading_and_inference_response(self):
+        config = AudioPreprocessConfig(sample_rate=8000, duration_seconds=1.0, n_mels=32)
+        class_to_idx = {
+            "air_conditioner": 0,
+            "car_horn": 1,
+            "children_playing": 2,
+            "dog_bark": 3,
+            "drilling": 4,
+            "engine_idling": 5,
+            "gun_shot": 6,
+            "jackhammer": 7,
+            "siren": 8,
+            "street_music": 9,
+        }
+        model = AmbientCNN(num_classes=len(class_to_idx))
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            checkpoint_path = f"{tmpdir}/ambient_cnn.pt"
+            torch.save(
+                {
+                    "model_state_dict": model.state_dict(),
+                    "class_to_idx": class_to_idx,
+                    "preprocess_config": config.to_dict(),
+                },
+                checkpoint_path,
+            )
+
+            classifier = EnvironmentAudioClassifier(checkpoint_path, device="cpu")
+            prediction = classifier.predict_waveform(torch.randn(config.num_samples), config.sample_rate)
+
+        self.assertIn(prediction["class"], class_to_idx)
+        self.assertGreaterEqual(prediction["confidence"], 0.0)
+        self.assertLessEqual(prediction["confidence"], 1.0)
+        self.assertEqual(len(prediction["probabilities"]), 10)

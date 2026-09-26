@@ -41,9 +41,9 @@ export default function HowItWorks() {
     display: "flex",
     justifyContent: "center",
     gap: "16px",
-    flexWrap: "nowrap",
+    flexWrap: "wrap",
     marginTop: "28px",
-    overflowX: "auto",
+    overflowX: "hidden",
     paddingBottom: "6px",
   };
 
@@ -52,7 +52,9 @@ export default function HowItWorks() {
     border: "1px solid rgba(255, 255, 255, 0.08)",
     borderRadius: "16px",
     padding: "20px 22px",
-    width: "240px",
+    width: "min(240px, 100%)",
+    flex: "1 1 200px",
+    maxWidth: "260px",
     boxShadow: "0 10px 30px rgba(0, 0, 0, 0.35)",
     backdropFilter: "blur(6px)",
   };

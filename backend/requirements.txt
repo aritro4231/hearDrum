@@ -6,3 +6,11 @@ sqlparse==0.5.3
 tzdata==2025.2
 gunicorn
 psycopg[binary]>=3.2,<4
+torch==2.14.0
+torchaudio==2.11.0
+pandas==3.0.6
+scikit-learn==1.9.1
+scipy==1.18.1
+soundfile==0.14.0
+tqdm==4.70.1
+requests==2.34.2

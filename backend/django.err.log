@@ -2,3 +2,25 @@
 [20/Sep/2026 22:37:55,609] - Broken pipe from ('127.0.0.1', 51825)
 [20/Sep/2026 22:38:05] "POST /api/auth/register/ HTTP/1.1" 201 136
 [20/Sep/2026 22:38:05,239] - Broken pipe from ('127.0.0.1', 51831)
+[20/Sep/2026 23:05:10] "OPTIONS /api/auth/register/ HTTP/1.1" 200 0
+[20/Sep/2026 23:05:10] "POST /api/auth/register/ HTTP/1.1" 400 151
+[20/Sep/2026 23:05:14] "POST /api/auth/register/ HTTP/1.1" 400 82
+[20/Sep/2026 23:05:20] "POST /api/auth/register/ HTTP/1.1" 201 128
+[20/Sep/2026 23:05:20] "OPTIONS /api/sessions/ HTTP/1.1" 200 0
+[20/Sep/2026 23:05:20] "OPTIONS /api/sessions/ HTTP/1.1" 200 0
+[20/Sep/2026 23:05:20] "GET /api/sessions/ HTTP/1.1" 200 15
+[20/Sep/2026 23:05:20] "GET /api/sessions/ HTTP/1.1" 200 15
+[20/Sep/2026 23:05:24] "GET /api/headphones/brands/?type=wired HTTP/1.1" 200 245
+[20/Sep/2026 23:05:24] "GET /api/headphones/brands/?type=wired HTTP/1.1" 200 245
+[20/Sep/2026 23:05:25] "GET /api/headphones/?brand=Apple&type=wired HTTP/1.1" 200 249
+[20/Sep/2026 23:05:25] "GET /api/headphones/?brand=Apple&type=wired HTTP/1.1" 200 249
+[20/Sep/2026 23:05:30] "GET /api/headphones/brands/?type=wired HTTP/1.1" 200 245
+[20/Sep/2026 23:05:30] "GET /api/headphones/brands/?type=wired HTTP/1.1" 200 245
+[20/Sep/2026 23:05:31] "GET /api/headphones/brands/?type=bluetooth HTTP/1.1" 200 240
+[20/Sep/2026 23:05:31] "GET /api/headphones/brands/?type=bluetooth HTTP/1.1" 200 240
+[20/Sep/2026 23:05:32] "GET /api/headphones/?brand=Apple&type=bluetooth HTTP/1.1" 200 1693
+[20/Sep/2026 23:05:32] "GET /api/headphones/?brand=Apple&type=bluetooth HTTP/1.1" 200 1693
+[20/Sep/2026 23:05:35] "POST /api/sessions/ HTTP/1.1" 201 233
+[20/Sep/2026 23:05:35] "POST /api/sessions/ HTTP/1.1" 201 233
+[20/Sep/2026 23:05:37] "GET /api/sessions/ HTTP/1.1" 200 482
+[20/Sep/2026 23:05:37] "GET /api/sessions/ HTTP/1.1" 200 482
