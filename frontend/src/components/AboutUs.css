@@ -1,13 +1,13 @@
 .about-page {
   text-align: center;
-  margin-top: 44px;
+  margin-top: 32px;
   min-height: 70vh;
   padding-bottom: 60px;
 }
 
 .about-title {
   color: var(--spotify-green);
-  font-size: 36px;
+  font-size: clamp(30px, 6vw, 36px);
 }
 
 .about-card {
@@ -34,8 +34,10 @@
 .about-photo-stack {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 14px;
+  width: 100%;
 }
 
 .about-photo {
@@ -119,5 +121,27 @@
   .about-bullets {
     text-align: left;
     max-width: 680px;
+  }
+}
+
+@media (max-width: 520px) {
+  .about-card {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .about-photo {
+    width: min(132px, 42vw);
+    height: min(132px, 42vw);
+    border-radius: 14px;
+  }
+
+  .about-name {
+    font-size: 22px;
+  }
+
+  .about-lead,
+  .about-bullets {
+    font-size: 14px;
   }
 }

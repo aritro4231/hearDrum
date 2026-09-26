@@ -3,6 +3,7 @@
   max-width: 720px;
   margin: 0 auto;
   padding-bottom: 60px;
+  text-align: center;
 }
 
 .volume-title {
@@ -17,6 +18,7 @@
   color: white;
   margin: 6px 0;
   font-size: 16px;
+  overflow-wrap: anywhere;
 }
 
 .volume-highlight {
@@ -41,6 +43,7 @@
   margin-top: 20px;
   color: white;
   font-size: 16px;
+  overflow-wrap: anywhere;
 }
 
 .next-button {

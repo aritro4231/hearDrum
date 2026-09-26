@@ -14,11 +14,32 @@
   font-family: "Poppins", sans-serif;
 }
 
+html,
+body,
+#root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 
 body {
   background-color: var(--bg-black);
   color: var(--white);
   min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+p,
+a,
+button,
+span,
+div,
+li,
+dd,
+dt {
+  overflow-wrap: anywhere;
 }
 
 @keyframes fadeSlideUp {
@@ -68,7 +89,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 25px 0 0 0;
+  padding: 25px 16px 0;
 }
 
 .logo {
@@ -87,7 +108,10 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 15px;
+  width: fit-content;
+  max-width: 100%;
   padding: 10px 12px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.04);
@@ -97,12 +121,17 @@ body {
 }
 
 .navbar a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   color: var(--gray);
   font-size: 15px;
   font-weight: 600;
   padding: 10px 16px;
   border-radius: 999px;
+  text-align: center;
+  white-space: normal;
   transition: all 0.2s ease;
 }
 
@@ -123,4 +152,39 @@ body {
   max-width: 900px;
   margin: 11px auto;
   padding: 0 20px;
+}
+
+@media (max-width: 620px) {
+  .header {
+    padding-top: 18px;
+  }
+
+  .logo {
+    width: 150px;
+  }
+
+  .navbar {
+    gap: 6px;
+    padding: 8px;
+    border-radius: 22px;
+  }
+
+  .navbar a {
+    flex: 1 1 calc(50% - 6px);
+    min-width: 126px;
+    padding: 9px 10px;
+    font-size: 13px;
+  }
+
+  .page-container {
+    margin-top: 16px;
+    padding-inline: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .navbar a {
+    min-width: 118px;
+    font-size: 12px;
+  }
 }

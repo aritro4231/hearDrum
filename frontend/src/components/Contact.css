@@ -1,5 +1,6 @@
 .contact-section {
-  padding: 28px 8px 64px;
+  padding: 28px 0 64px;
+  text-align: center;
 }
 
 .contact-inner {
@@ -42,6 +43,7 @@
   text-decoration: none;
   color: inherit;
   min-width: 0;
+  text-align: left;
   transition:
     transform 180ms ease,
     border-color 200ms ease,
@@ -105,5 +107,13 @@
 @media (max-width: 680px) {
   .contact-grid {
     grid-template-columns: 1fr;
+  }
+
+  .contact-card {
+    padding: 14px;
+  }
+
+  .contact-title {
+    font-size: 30px;
   }
 }

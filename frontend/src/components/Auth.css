@@ -3,6 +3,7 @@
   max-width: 520px;
   margin: 28px auto 0;
   padding-bottom: 70px;
+  text-align: center;
 }
 
 .auth-panel {
@@ -22,6 +23,7 @@
   background: #0f0f0f;
   border: 1px solid rgba(255, 255, 255, 0.08);
   margin-bottom: 24px;
+  max-width: 100%;
 }
 
 .auth-tab {
@@ -64,6 +66,7 @@
   color: var(--white);
   font-size: 14px;
   font-weight: 600;
+  text-align: left;
 }
 
 .auth-form input {
@@ -85,6 +88,18 @@
 .auth-error {
   color: #ff8f8f;
   font-size: 14px;
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  .auth-panel {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .auth-tab {
+    padding-inline: 13px;
+  }
 }
 
 .auth-submit {

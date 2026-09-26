@@ -17,11 +17,13 @@ export default function Home() {
 
   const heroTitleStyle = {
     color: "var(--spotify-green)",
-    fontSize: "42px",
+    fontSize: "clamp(30px, 8vw, 42px)",
     marginBottom: "14px",
     position: "relative",
     zIndex: 1,
-    whiteSpace: "nowrap",
+    maxWidth: "820px",
+    marginInline: "auto",
+    lineHeight: 1.12,
   };
 
   const heroSubtitleStyle = {
@@ -33,6 +35,7 @@ export default function Home() {
     maxWidth: "720px",
     marginInline: "auto",
     lineHeight: 1.6,
+    textWrap: "pretty",
   };
 
   const sectionStyle = {
@@ -54,7 +57,7 @@ export default function Home() {
     border: "1px solid rgba(255, 255, 255, 0.08)",
     borderRadius: "16px",
     padding: "18px 20px",
-    width: "240px",
+    width: "min(240px, 100%)",
     textAlign: "center",
     boxShadow: "0 10px 30px rgba(0, 0, 0, 0.35)",
     backdropFilter: "blur(6px)",
@@ -71,6 +74,7 @@ export default function Home() {
     color: "var(--gray)",
     fontSize: "14px",
     lineHeight: 1.6,
+    overflowWrap: "anywhere",
   };
 
   const secondaryButtonStyle = {
@@ -104,12 +108,13 @@ export default function Home() {
   const ctaPanelStyle = {
     marginTop: "64px",
     padding: "28px 24px",
-    borderRadius: "20px",
+    borderRadius: "16px",
     background:
       "linear-gradient(135deg, rgba(29,185,84,0.18), rgba(29,185,84,0.05))",
     border: "1px solid rgba(29, 185, 84, 0.35)",
     boxShadow: "0 16px 40px rgba(29, 185, 84, 0.12)",
     maxWidth: "780px",
+    width: "100%",
     marginInline: "auto",
   };
 
@@ -117,6 +122,7 @@ export default function Home() {
     ...ctaPanelStyle,
     marginTop: "52px",
     maxWidth: "860px",
+    width: "100%",
   };
 
   const demoSliderWrapStyle = {
@@ -125,6 +131,7 @@ export default function Home() {
     border: "1px solid rgba(255, 255, 255, 0.08)",
     borderRadius: "16px",
     padding: "18px 18px 16px 18px",
+    width: "100%",
   };
 
   const demoRangeStyle = {
@@ -181,6 +188,7 @@ export default function Home() {
             gap: "12px",
             flexWrap: "wrap",
             marginBottom: "22px",
+            width: "100%",
           }}
         >
           <button
