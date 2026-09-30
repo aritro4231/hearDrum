@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from urllib.parse import parse_qsl, unquote, urlparse
 
 import os
 
@@ -88,14 +89,51 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+def env_value(name, default=""):
+    return os.getenv(name) or default
+
+
+def database_config_from_url(database_url):
+    parsed = urlparse(database_url)
+    engine_by_scheme = {
+        "postgres": "django.db.backends.postgresql",
+        "postgresql": "django.db.backends.postgresql",
+        "postgresql+psycopg": "django.db.backends.postgresql",
+    }
+    engine = engine_by_scheme.get(parsed.scheme)
+    if not engine:
+        return None
+
+    config = {
+        "ENGINE": engine,
+        "NAME": unquote(parsed.path.lstrip("/")),
+        "USER": unquote(parsed.username or ""),
+        "PASSWORD": unquote(parsed.password or ""),
+        "HOST": parsed.hostname or "",
+        "PORT": str(parsed.port or ""),
+    }
+    options = {
+        key: value
+        for key, value in parse_qsl(parsed.query)
+        if key in {"sslmode", "service"}
+    }
+    if options:
+        config["OPTIONS"] = options
+    return config
+
+
+database_url = env_value("DATABASE_URL")
+railway_database = database_config_from_url(database_url) if database_url else None
+
 DATABASES = {
-    "default": {
-        "ENGINE": os.getenv("DB_ENGINE", "django.db.backends.postgresql"),
-        "NAME": os.getenv("DB_NAME", "heardrum"),
-        "USER": os.getenv("DB_USER", "postgres"),
-        "PASSWORD": os.getenv("DB_PASSWORD", ""),
-        "HOST": os.getenv("DB_HOST", "localhost"),
-        "PORT": os.getenv("DB_PORT", "6767"),
+    "default": railway_database
+    or {
+        "ENGINE": env_value("DB_ENGINE", "django.db.backends.postgresql"),
+        "NAME": env_value("DB_NAME", env_value("PGDATABASE", "heardrum")),
+        "USER": env_value("DB_USER", env_value("PGUSER", "postgres")),
+        "PASSWORD": env_value("DB_PASSWORD", env_value("PGPASSWORD", "")),
+        "HOST": env_value("DB_HOST", env_value("PGHOST", "localhost")),
+        "PORT": env_value("DB_PORT", env_value("PGPORT", "6767")),
     }
 }
 
