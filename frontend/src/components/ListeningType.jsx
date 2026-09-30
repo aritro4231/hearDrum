@@ -35,6 +35,7 @@ export default function ListeningType() {
       <div className="listening-choices">
         {OPTIONS.map(({ type, Icon, title, subtext }) => {
           const isSelected = selectedType === type;
+          const ChoiceIcon = Icon;
           return (
             <button
               key={type}
@@ -44,7 +45,7 @@ export default function ListeningType() {
               aria-pressed={isSelected}
             >
               <span className="choice-icon" aria-hidden="true">
-                <Icon size={28} strokeWidth={2.25} />
+                <ChoiceIcon size={28} strokeWidth={2.25} />
               </span>
 
               <span className="choice-content">

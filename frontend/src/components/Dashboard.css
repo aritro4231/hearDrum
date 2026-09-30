@@ -54,9 +54,33 @@
   padding: 18px 20px;
 }
 
+.session-day-list,
 .session-list {
   display: grid;
   gap: 14px;
+}
+
+.session-day {
+  display: grid;
+  gap: 14px;
+}
+
+.session-day-header {
+  border: 1px solid rgba(29, 185, 84, 0.22);
+  border-radius: 10px;
+  background: rgba(29, 185, 84, 0.08);
+  padding: 16px 18px;
+}
+
+.session-day-header h2 {
+  color: var(--spotify-green);
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.session-day-header p {
+  color: var(--gray);
+  font-size: 14px;
 }
 
 .session-card h2 {
@@ -68,7 +92,7 @@
 
 .session-card dl {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 12px;
   margin-top: 16px;
 }
@@ -86,6 +110,27 @@
   overflow-wrap: anywhere;
 }
 
+.session-ambient {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 14px;
+}
+
+.session-ambient span {
+  color: var(--gray);
+  font-size: 13px;
+}
+
+.session-ambient strong {
+  color: var(--spotify-green);
+  font-size: 14px;
+  text-align: right;
+}
+
 @media (max-width: 680px) {
   .dashboard-header {
     align-items: center;
@@ -95,6 +140,15 @@
 
   .session-card dl {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .session-ambient {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .session-ambient strong {
+    text-align: left;
   }
 }
 

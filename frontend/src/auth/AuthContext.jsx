@@ -1,8 +1,8 @@
-import { createContext, useContext, useState } from "react";
+import { useState } from "react";
 import { loginUser, logoutUser, registerUser } from "../api";
+import { AuthContext } from "./authStore";
 
 const AUTH_KEY = "hearDrumAuth";
-const AuthContext = createContext(null);
 
 function readStoredAuth() {
   try {
@@ -52,8 +52,4 @@ export function AuthProvider({ children }) {
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
-
-export function useAuth() {
-  return useContext(AuthContext);
 }

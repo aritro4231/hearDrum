@@ -1,8 +1,65 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getListeningSessions } from "../api";
-import { useAuth } from "../auth/AuthContext";
+import { useAuth } from "../auth/authStore";
 import "./Dashboard.css";
+
+function formatAmbientClass(value) {
+  if (!value) return "";
+  return value
+    .split("_")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+function formatConfidence(value) {
+  const confidence = Number(value);
+  if (!Number.isFinite(confidence)) return "";
+  return `${Math.round(confidence * 100)}%`;
+}
+
+function formatPercent(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return "0%";
+  return `${number.toFixed(number >= 100 ? 0 : 1)}%`;
+}
+
+function formatMinutes(seconds) {
+  return `${Math.round(Number(seconds || 0) / 60)} min`;
+}
+
+function sessionDate(session) {
+  return new Date(session.started_at || session.created_at);
+}
+
+function groupSessionsByDate(sessions) {
+  const groups = new Map();
+  for (const session of sessions) {
+    const date = sessionDate(session);
+    const key = date.toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+    if (!groups.has(key)) {
+      groups.set(key, {
+        label: key,
+        sessions: [],
+        exposure: 0,
+        seconds: 0,
+      });
+    }
+    const group = groups.get(key);
+    group.sessions.push(session);
+    group.exposure += Number(
+      session.status === "completed"
+        ? session.exposure_percent
+        : session.current_exposure_percent
+    ) || 0;
+    group.seconds += Number(session.actual_duration_seconds || 0);
+  }
+  return [...groups.values()];
+}
 
 export default function Dashboard() {
   const { isAuthenticated, logout, token, user } = useAuth();
@@ -37,6 +94,8 @@ export default function Dashboard() {
     };
   }, [isAuthenticated, navigate, token]);
 
+  const groupedSessions = useMemo(() => groupSessionsByDate(sessions), [sessions]);
+
   const signOut = async () => {
     await logout();
     navigate("/", { replace: true });
@@ -64,34 +123,85 @@ export default function Dashboard() {
         </div>
       )}
 
-      {!loading && !error && sessions.length > 0 && (
-        <div className="session-list">
-          {sessions.map((session) => (
-            <article className="session-card" key={session.id}>
-              <div>
-                <h2>{session.headphone?.name || "Unknown headphone"}</h2>
-                <p>{new Date(session.created_at).toLocaleString()}</p>
+      {!loading && !error && groupedSessions.length > 0 && (
+        <div className="session-day-list">
+          {groupedSessions.map((group) => (
+            <section className="session-day" key={group.label}>
+              <div className="session-day-header">
+                <h2>{group.label}</h2>
+                <p>
+                  {group.sessions.length} session{group.sessions.length === 1 ? "" : "s"} •{" "}
+                  {formatMinutes(group.seconds)} listened • {formatPercent(group.exposure)} exposure
+                </p>
               </div>
 
-              <dl>
-                <div>
-                  <dt>Connection</dt>
-                  <dd>{session.connection_type}</dd>
-                </div>
-                <div>
-                  <dt>Volume</dt>
-                  <dd>{session.volume_percent}%</dd>
-                </div>
-                <div>
-                  <dt>Estimated dB</dt>
-                  <dd>{session.estimated_db} dB SPL</dd>
-                </div>
-                <div>
-                  <dt>Duration</dt>
-                  <dd>{session.duration_minutes} min</dd>
-                </div>
-              </dl>
-            </article>
+              <div className="session-list">
+                {group.sessions.map((session) => (
+                  <article className="session-card" key={session.id}>
+                    <div>
+                      <h2>{session.headphone?.name || "Unknown headphone"}</h2>
+                      <p>
+                        {sessionDate(session).toLocaleTimeString([], {
+                          hour: "numeric",
+                          minute: "2-digit",
+                        })}
+                        {session.ended_at
+                          ? ` - ${new Date(session.ended_at).toLocaleTimeString([], {
+                              hour: "numeric",
+                              minute: "2-digit",
+                            })}`
+                          : ` - ${session.status}`}
+                      </p>
+                    </div>
+
+                    <dl>
+                      <div>
+                        <dt>Connection</dt>
+                        <dd>{session.connection_type}</dd>
+                      </div>
+                      <div>
+                        <dt>Volume</dt>
+                        <dd>{session.volume_percent}%</dd>
+                      </div>
+                      <div>
+                        <dt>Estimated dB</dt>
+                        <dd>{session.estimated_db} dB SPL</dd>
+                      </div>
+                      <div>
+                        <dt>Listened</dt>
+                        <dd>{formatMinutes(session.actual_duration_seconds)}</dd>
+                      </div>
+                      <div>
+                        <dt>Exposure</dt>
+                        <dd>
+                          {formatPercent(
+                            session.status === "completed"
+                              ? session.exposure_percent
+                              : session.current_exposure_percent
+                          )}
+                        </dd>
+                      </div>
+                      <div>
+                        <dt>Status</dt>
+                        <dd>{session.status}</dd>
+                      </div>
+                    </dl>
+
+                    {session.ambient_analysis_used && (
+                      <div className="session-ambient">
+                        <span>Environmental context</span>
+                        <strong>
+                          {formatAmbientClass(session.ambient_environment_class)}
+                          {session.ambient_confidence != null
+                            ? ` (${formatConfidence(session.ambient_confidence)})`
+                            : ""}
+                        </strong>
+                      </div>
+                    )}
+                  </article>
+                ))}
+              </div>
+            </section>
           ))}
         </div>
       )}

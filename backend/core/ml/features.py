@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import io
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
@@ -36,6 +37,24 @@ class AudioPreprocessConfig:
         return cls(**(values or {}))
 
 
+def _samples_to_waveform(samples) -> torch.Tensor:
+    if hasattr(samples, "copy"):
+        samples = samples.copy()
+    waveform = torch.as_tensor(samples)
+    if waveform.ndim == 0:
+        raise ValueError("Audio contains no waveform samples.")
+    if waveform.ndim == 1:
+        waveform = waveform.unsqueeze(0)
+    else:
+        waveform = waveform.transpose(0, 1)
+    if waveform.dtype.is_floating_point:
+        waveform = waveform.float()
+    else:
+        max_value = float(torch.iinfo(waveform.dtype).max)
+        waveform = waveform.float() / max_value
+    return waveform
+
+
 def load_audio(path: str | Path) -> tuple[torch.Tensor, int]:
     path = Path(path)
     if path.suffix.lower() == ".wav":
@@ -43,19 +62,26 @@ def load_audio(path: str | Path) -> tuple[torch.Tensor, int]:
             sample_rate, samples = wavfile.read(path)
         except ValueError:
             samples, sample_rate = sf.read(path, always_2d=False)
-        waveform = torch.as_tensor(samples)
-        if waveform.ndim == 1:
-            waveform = waveform.unsqueeze(0)
-        else:
-            waveform = waveform.transpose(0, 1)
-        if waveform.dtype.is_floating_point:
-            waveform = waveform.float()
-        else:
-            max_value = float(torch.iinfo(waveform.dtype).max)
-            waveform = waveform.float() / max_value
-        return waveform, int(sample_rate)
+        return _samples_to_waveform(samples), int(sample_rate)
     waveform, sample_rate = torchaudio.load(str(path))
     return waveform, sample_rate
+
+
+def load_audio_bytes(data: bytes, suffix: str = ".wav") -> tuple[torch.Tensor, int]:
+    if not data:
+        raise ValueError("Audio upload is empty.")
+
+    buffer = io.BytesIO(data)
+    if suffix.lower() == ".wav":
+        try:
+            sample_rate, samples = wavfile.read(buffer)
+        except ValueError:
+            buffer.seek(0)
+            samples, sample_rate = sf.read(buffer, always_2d=False)
+        return _samples_to_waveform(samples), int(sample_rate)
+
+    samples, sample_rate = sf.read(buffer, always_2d=False)
+    return _samples_to_waveform(samples), int(sample_rate)
 
 
 class LogMelFeatureExtractor(torch.nn.Module):

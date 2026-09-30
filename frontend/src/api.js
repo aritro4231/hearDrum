@@ -86,3 +86,73 @@ export async function saveListeningSession(token, session) {
   });
   return parseResponse(res);
 }
+
+export async function startListeningSession(token, session) {
+  const res = await fetch(`${API}/api/sessions/start/`, {
+    method: "POST",
+    headers: {
+      Authorization: `Token ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(session),
+  });
+  return parseResponse(res);
+}
+
+export async function getCurrentListeningSession(token) {
+  const res = await fetch(`${API}/api/sessions/current/`, {
+    headers: { Authorization: `Token ${token}` },
+  });
+  return parseResponse(res);
+}
+
+export async function getTodayExposure(token) {
+  const res = await fetch(`${API}/api/sessions/today/`, {
+    headers: { Authorization: `Token ${token}` },
+  });
+  return parseResponse(res);
+}
+
+export async function pauseListeningSession(token, sessionId) {
+  const res = await fetch(`${API}/api/sessions/${sessionId}/pause/`, {
+    method: "POST",
+    headers: { Authorization: `Token ${token}` },
+  });
+  return parseResponse(res);
+}
+
+export async function resumeListeningSession(token, sessionId) {
+  const res = await fetch(`${API}/api/sessions/${sessionId}/resume/`, {
+    method: "POST",
+    headers: { Authorization: `Token ${token}` },
+  });
+  return parseResponse(res);
+}
+
+export async function endListeningSession(token, sessionId) {
+  const res = await fetch(`${API}/api/sessions/${sessionId}/end/`, {
+    method: "POST",
+    headers: { Authorization: `Token ${token}` },
+  });
+  return parseResponse(res);
+}
+
+export async function editListeningSessionSettings(token, sessionId) {
+  const res = await fetch(`${API}/api/sessions/${sessionId}/edit/`, {
+    method: "POST",
+    headers: { Authorization: `Token ${token}` },
+  });
+  return parseResponse(res);
+}
+
+export async function analyzeAmbientAudio(token, audioBlob) {
+  const formData = new FormData();
+  formData.append("audio", audioBlob, "ambient-sample.wav");
+
+  const res = await fetch(`${API}/api/ambient/analyze/`, {
+    method: "POST",
+    headers: { Authorization: `Token ${token}` },
+    body: formData,
+  });
+  return parseResponse(res);
+}

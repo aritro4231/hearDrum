@@ -146,6 +146,17 @@ REST_FRAMEWORK = {
     ],
 }
 
+AMBIENT_MODEL_PATH = os.getenv(
+    "AMBIENT_MODEL_PATH",
+    str(BASE_DIR / "core" / "ml" / "models" / "ambient_cnn.pt"),
+)
+AMBIENT_MODEL_DEVICE = os.getenv("AMBIENT_MODEL_DEVICE") or None
+AMBIENT_AUDIO_MAX_UPLOAD_BYTES = int(
+    os.getenv("AMBIENT_AUDIO_MAX_UPLOAD_BYTES", str(4 * 1024 * 1024))
+)
+AMBIENT_AUDIO_MIN_SECONDS = float(os.getenv("AMBIENT_AUDIO_MIN_SECONDS", "1.0"))
+AMBIENT_AUDIO_MAX_SECONDS = float(os.getenv("AMBIENT_AUDIO_MAX_SECONDS", "8.0"))
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:5174",

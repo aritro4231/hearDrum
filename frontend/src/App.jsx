@@ -5,6 +5,7 @@ import ListeningType from "./components/ListeningType";
 import BrandSelect from "./components/BrandSelect";
 import ModelSelect from "./components/ModelSelect";
 import VolumeSelect from "./components/VolumeSelect.jsx";
+import AmbientAnalysis from "./components/AmbientAnalysis.jsx";
 import Results from "./components/Results.jsx";
 import HowItWorks from "./components/HowItWorks.jsx";
 import AboutUs from "./components/AboutUs.jsx";
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/brand" element={<BrandSelect />} />
         <Route path="/model" element={<ModelSelect />} />
         <Route path="/volume" element={<VolumeSelect />} />
+        <Route path="/ambient" element={<AmbientAnalysis />} />
         <Route path="/results" element={<Results />} />
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/about-us" element={<AboutUs />} />

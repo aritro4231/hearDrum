@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../auth/AuthContext";
+import { useAuth } from "../auth/authStore";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -42,32 +42,6 @@ export default function Home() {
     marginTop: "56px",
     position: "relative",
     zIndex: 1,
-  };
-
-  const cardRowStyle = {
-    display: "flex",
-    justifyContent: "center",
-    gap: "16px",
-    flexWrap: "wrap",
-    marginTop: "18px",
-  };
-
-  const cardStyle = {
-    background: "rgba(255, 255, 255, 0.04)",
-    border: "1px solid rgba(255, 255, 255, 0.08)",
-    borderRadius: "16px",
-    padding: "18px 20px",
-    width: "min(240px, 100%)",
-    textAlign: "center",
-    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.35)",
-    backdropFilter: "blur(6px)",
-  };
-
-  const cardTitleStyle = {
-    color: "var(--white)",
-    fontSize: "16px",
-    fontWeight: 600,
-    marginBottom: "6px",
   };
 
   const cardTextStyle = {

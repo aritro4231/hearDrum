@@ -1,22 +1,9 @@
-/* BrandSelect Scoped Container */
-.brand-page-wrapper {
-  position: relative;
-  z-index: 1;
-}
-
-/* Overlay only inside BrandSelect page */
-.brand-select-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0); /* invisible but clickable */
-}
-
 .brand-select-container {
   width: 100%;
   max-width: 720px;
   margin: 0 auto;
   position: relative;
+  overflow: visible;
   padding-bottom: 60px;
 }
 
@@ -26,6 +13,22 @@
   text-align: center;
   font-size: clamp(30px, 4.6vw, 40px);
   font-weight: 700;
+}
+
+.brand-combobox {
+  position: relative;
+  z-index: 1;
+}
+
+.brand-combobox.is-open {
+  z-index: 100;
+}
+
+.brand-select-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: transparent;
 }
 
 .brand-input {
@@ -38,7 +41,7 @@
   color: white;
   outline: none;
   position: relative;
-  z-index: 20;
+  z-index: 60;
 }
 
 .brand-input:focus {
@@ -47,16 +50,17 @@
 
 .brand-dropdown {
   position: absolute;
-  top: 112px;
+  top: calc(100% + 8px);
   left: 0;
   width: 100%;
-  max-height: 300px;
+  max-height: min(320px, 48vh);
   overflow-y: auto;
   background: #0d0d0d;
   border: 1px solid #333;
-  border-radius: 6px;
-  z-index: 30;
+  border-radius: 8px;
+  z-index: 70;
   padding: 10px 0;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
 }
 
 .brand-item {
