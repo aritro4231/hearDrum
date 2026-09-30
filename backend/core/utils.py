@@ -1,7 +1,5 @@
 from pathlib import Path
 
-from django.db.models import Q
-
 from .models import Headphone
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
@@ -12,13 +10,13 @@ def headphones_for_type(listening_type=None):
     headphones = Headphone.objects.all().order_by("name", "id")
 
     if listening_type == "wired":
-        return headphones.filter(
-            Q(connection="wired") | Q(max_db_spl_wired__isnull=False)
+        return headphones.exclude(max_db_spl_wired__isnull=True).exclude(
+            max_db_spl_wired=""
         )
 
     if listening_type == "bluetooth":
-        return headphones.filter(
-            Q(connection="bluetooth") | Q(max_db_spl_bluetooth__isnull=False)
+        return headphones.exclude(max_db_spl_bluetooth__isnull=True).exclude(
+            max_db_spl_bluetooth=""
         )
 
     return headphones

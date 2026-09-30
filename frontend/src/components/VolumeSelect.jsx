@@ -6,6 +6,11 @@ export default function VolumeSelect() {
   const navigate = useNavigate();
   const modelData = JSON.parse(localStorage.getItem("selectedModel") || "null");
   const listeningType = localStorage.getItem("listeningType");
+  const [volume, setVolume] = useState(() => {
+    const stored = Number(localStorage.getItem("listeningVolume"));
+    return Number.isFinite(stored) ? stored : 50;
+  });
+  const [saved, setSaved] = useState(false);
 
   if (!modelData || !listeningType) {
     return (
@@ -27,9 +32,6 @@ export default function VolumeSelect() {
     return match ? Number(match[0]) : NaN;
   };
 
-  const [volume, setVolume] = useState(50);
-  const [saved, setSaved] = useState(false);
-
   const numericMax = extractFirstNumber(maxDb);
   const safeNumericMax = Number.isFinite(numericMax) ? numericMax : 0;
   const estimatedDb = Math.round((volume / 100) * safeNumericMax);
@@ -37,8 +39,9 @@ export default function VolumeSelect() {
   const saveVolume = () => {
     localStorage.setItem("listeningVolume", String(volume));
     localStorage.setItem("estimatedDb", String(estimatedDb));
+    localStorage.removeItem("ambientAnalysis");
     setSaved(true);
-    navigate("/results");
+    navigate("/ambient");
   };
 
   return (

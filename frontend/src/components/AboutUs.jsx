@@ -16,7 +16,7 @@ export default function AboutUs() {
 
           <div className="about-badges">
             <span className="about-badge">Virginia Tech</span>
-            <span className="about-badge">CS Junior</span>
+            <span className="about-badge">CS Senior</span>
             <span className="about-badge">DJ / Producer</span>
           </div>
         </div>

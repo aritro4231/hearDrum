@@ -35,8 +35,8 @@ export default function BrandSelect() {
     };
   }, [listeningType, navigate]);
 
-  const filteredBrands = brands.filter((b) =>
-    b.toLowerCase().includes(search.toLowerCase())
+  const filteredBrands = brands.filter((brand) =>
+    brand.toLowerCase().includes(search.toLowerCase())
   );
 
   const selectBrand = (brand) => {
@@ -51,44 +51,48 @@ export default function BrandSelect() {
     <div className="brand-select-container brand-page-wrapper">
       <h1 className="brand-select-title">Select Your Headphone Brand</h1>
 
-      <input
-        type="text"
-        placeholder="Search brand..."
-        value={search}
-        onChange={(e) => {
-          setSearch(e.target.value);
-          setShowDropdown(true);
-        }}
-        onFocus={() => setShowDropdown(true)}
-        className="brand-input"
-      />
+      <div className={`brand-combobox${showDropdown ? " is-open" : ""}`}>
+        <input
+          type="text"
+          placeholder="Search brand..."
+          value={search}
+          onChange={(event) => {
+            setSearch(event.target.value);
+            setShowDropdown(true);
+          }}
+          onFocus={() => setShowDropdown(true)}
+          className="brand-input"
+          aria-expanded={showDropdown}
+          aria-controls="brand-dropdown"
+        />
 
-      {/* DROPDOWN */}
-      {showDropdown && (
-        <div className="brand-dropdown">
-          {filteredBrands.length === 0 && (
-            <p className="no-results">No brands found</p>
-          )}
-
-          {filteredBrands.map((brand) => (
+        {showDropdown && (
+          <>
             <div
-              key={brand}
-              className="brand-item"
-              onClick={() => selectBrand(brand)}
-            >
-              {brand}
-            </div>
-          ))}
-        </div>
-      )}
+              className="brand-select-overlay"
+              onClick={() => setShowDropdown(false)}
+            ></div>
 
-      {/* CLICK-OUTSIDE OVERLAY — NOW SCOPED TO BRAND PAGE ONLY */}
-      {showDropdown && (
-        <div
-          className="brand-select-overlay"
-          onClick={() => setShowDropdown(false)}
-        ></div>
-      )}
+            <div className="brand-dropdown" id="brand-dropdown" role="listbox">
+              {filteredBrands.length === 0 && (
+                <p className="no-results">No brands found</p>
+              )}
+
+              {filteredBrands.map((brand) => (
+                <div
+                  key={brand}
+                  className="brand-item"
+                  role="option"
+                  aria-selected="false"
+                  onClick={() => selectBrand(brand)}
+                >
+                  {brand}
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.db.models import Q
 
 
 class Headphone(models.Model):
@@ -38,6 +39,15 @@ class Headphone(models.Model):
 
 
 class ListeningSession(models.Model):
+    STATUS_ACTIVE = "active"
+    STATUS_PAUSED = "paused"
+    STATUS_COMPLETED = "completed"
+    STATUS_CHOICES = [
+        (STATUS_ACTIVE, "Active"),
+        (STATUS_PAUSED, "Paused"),
+        (STATUS_COMPLETED, "Completed"),
+    ]
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -56,10 +66,49 @@ class ListeningSession(models.Model):
     )
     estimated_db = models.FloatField(validators=[MinValueValidator(0)])
     duration_minutes = models.PositiveIntegerField(
-        validators=[MinValueValidator(1)]
+        default=0,
+        validators=[MinValueValidator(0)]
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default=STATUS_COMPLETED,
+        db_index=True,
+    )
+    started_at = models.DateTimeField(null=True, blank=True)
+    last_resumed_at = models.DateTimeField(null=True, blank=True)
+    paused_at = models.DateTimeField(null=True, blank=True)
+    ended_at = models.DateTimeField(null=True, blank=True)
+    accumulated_duration_seconds = models.FloatField(
+        default=0,
+        validators=[MinValueValidator(0)],
+    )
+    exposure_percent = models.FloatField(
+        default=0,
+        validators=[MinValueValidator(0)],
+    )
+    ambient_analysis_used = models.BooleanField(default=False)
+    ambient_environment_class = models.CharField(
+        max_length=40,
+        null=True,
+        blank=True,
+    )
+    ambient_confidence = models.FloatField(
+        null=True,
+        blank=True,
+        validators=[MinValueValidator(0), MaxValueValidator(1)],
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user"],
+                condition=Q(status__in=["active", "paused"]),
+                name="one_unfinished_listening_session_per_user",
+            )
+        ]
 
     def __str__(self):
         return f"{self.user} - {self.headphone.name} - {self.created_at}"

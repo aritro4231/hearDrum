@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./BrandSelect.css"; // reusing styles
+import "./BrandSelect.css";
 import { getHeadphoneModels } from "../api";
 
 export default function ModelSelect() {
@@ -20,7 +20,6 @@ export default function ModelSelect() {
     }
 
     if (!brand) {
-      // if no brand, send back to brand page
       navigate("/brand");
       return;
     }
@@ -43,35 +42,36 @@ export default function ModelSelect() {
     };
   }, [brand, listeningType, navigate]);
 
-  const matchesListeningType = (m) => {
-    const hasWired = m.max_dB_SPL_wired != null;
-    const hasBluetooth = m.max_dB_SPL_bluetooth != null;
-    const connection = (m.connection || "").toLowerCase();
+  const hasSpec = (value) => value != null && String(value).trim() !== "";
+
+  const matchesListeningType = (model) => {
+    const hasWired = hasSpec(model.max_dB_SPL_wired);
+    const hasBluetooth = hasSpec(model.max_dB_SPL_bluetooth);
+    const connection = (model.connection || "").toLowerCase();
+    const isBoth = connection === "both";
     const isWireless = connection === "wireless";
     const isBluetooth = connection === "bluetooth" || isWireless;
 
     if (listeningType === "wired") {
-      if (connection && connection !== "wired") return false;
+      if (connection && connection !== "wired" && !isBoth) return false;
       return hasWired;
     }
 
     if (listeningType === "bluetooth") {
-      if (connection && !isBluetooth) return false;
+      if (connection && !isBluetooth && !isBoth) return false;
       return hasBluetooth;
     }
 
     return true;
   };
 
-  const modelsForType = models.filter(matchesListeningType);
-
-  const filteredModels = modelsForType.filter((m) =>
-    m.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredModels = models
+    .filter(matchesListeningType)
+    .filter((model) => model.name.toLowerCase().includes(search.toLowerCase()));
 
   const selectModel = (model) => {
-    // just store the model and go to volume
     localStorage.setItem("selectedModel", JSON.stringify(model));
+    setShowDropdown(false);
     navigate("/volume");
   };
 
@@ -87,42 +87,48 @@ export default function ModelSelect() {
         Brand: <b>{brand}</b>
       </p>
 
-      <input
-        type="text"
-        placeholder="Search model..."
-        value={search}
-        onFocus={() => setShowDropdown(true)}
-        onChange={(e) => {
-          setSearch(e.target.value);
-          setShowDropdown(true);
-        }}
-        className="brand-input"
-      />
+      <div className={`brand-combobox${showDropdown ? " is-open" : ""}`}>
+        <input
+          type="text"
+          placeholder="Search model..."
+          value={search}
+          onFocus={() => setShowDropdown(true)}
+          onChange={(event) => {
+            setSearch(event.target.value);
+            setShowDropdown(true);
+          }}
+          className="brand-input"
+          aria-expanded={showDropdown}
+          aria-controls="model-dropdown"
+        />
 
-      {showDropdown && (
-        <div className="brand-dropdown">
-          {filteredModels.length === 0 && (
-            <p className="no-results">No models found</p>
-          )}
-
-          {filteredModels.map((model) => (
+        {showDropdown && (
+          <>
             <div
-              key={model.name}
-              className="brand-item"
-              onClick={() => selectModel(model)}
-            >
-              {model.name}
-            </div>
-          ))}
-        </div>
-      )}
+              className="brand-select-overlay"
+              onClick={() => setShowDropdown(false)}
+            ></div>
 
-      {showDropdown && (
-        <div
-          className="brand-select-overlay"
-          onClick={() => setShowDropdown(false)}
-        ></div>
-      )}
+            <div className="brand-dropdown" id="model-dropdown" role="listbox">
+              {filteredModels.length === 0 && (
+                <p className="no-results">No models found</p>
+              )}
+
+              {filteredModels.map((model) => (
+                <div
+                  key={model.name}
+                  className="brand-item"
+                  role="option"
+                  aria-selected="false"
+                  onClick={() => selectModel(model)}
+                >
+                  {model.name}
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }

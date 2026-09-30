@@ -1,6 +1,6 @@
 // src/components/Slider.jsx
-import { useEffect, useState } from "react";
-import "./slider.css";
+import { useEffect } from "react";
+import "./Slider.css";
 
 const images = [
   "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1e5becf441ad8ea50f63e8-hQCeK7sV7L0jJ2sQA8wyVJdC9XPIxC.webp",
@@ -12,15 +12,12 @@ const images = [
 ];
 
 export default function Slider() {
-  const [cards, setCards] = useState([]);
+  const cards = images.map((img, index) => ({
+    id: index + 1,
+    imgSrc: img,
+  }));
 
   useEffect(() => {
-    const newCards = images.map((img, index) => ({
-      id: index + 1,
-      imgSrc: img,
-    }));
-    setCards(newCards);
-
     const handleScroll = () => {
       const scrollPos = window.scrollY;
       const slider = document.querySelector(".slider");

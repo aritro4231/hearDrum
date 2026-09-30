@@ -1,0 +1,131 @@
+.ambient-container {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+.ambient-title {
+  color: var(--spotify-green);
+  margin-bottom: 28px;
+  text-align: center;
+  font-size: clamp(30px, 4.6vw, 40px);
+  font-weight: 700;
+}
+
+.ambient-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: #0e0e0e;
+  padding: 22px;
+}
+
+.ambient-copy {
+  color: var(--gray);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.ambient-status {
+  margin-top: 20px;
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.ambient-status-listening,
+.ambient-status-analyzing,
+.ambient-status-detected {
+  color: var(--spotify-green);
+}
+
+.ambient-result {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.ambient-result div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 12px;
+}
+
+.ambient-result span {
+  color: var(--gray);
+  font-size: 14px;
+}
+
+.ambient-result strong {
+  color: var(--spotify-green);
+  font-size: 16px;
+  text-align: right;
+}
+
+.ambient-result p {
+  color: var(--gray);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.ambient-error {
+  margin-top: 16px;
+  color: #ff8f8f;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.ambient-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.ambient-primary,
+.ambient-secondary {
+  min-height: 48px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 13px 18px;
+}
+
+.ambient-primary {
+  flex: 1 1 230px;
+  border: none;
+  background: var(--spotify-green);
+  color: #000;
+}
+
+.ambient-secondary {
+  flex: 1 1 120px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: transparent;
+  color: var(--white);
+}
+
+.ambient-primary:disabled,
+.ambient-secondary:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+@media (max-width: 520px) {
+  .ambient-card {
+    padding: 18px;
+  }
+
+  .ambient-result div {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ambient-result strong {
+    text-align: left;
+  }
+}

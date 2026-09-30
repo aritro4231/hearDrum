@@ -35,8 +35,6 @@ export default function HowItWorks() {
     marginInline: "auto",
   };
 
-  const subtitleStyle = {};
-
   const rowStyle = {
     display: "flex",
     justifyContent: "center",

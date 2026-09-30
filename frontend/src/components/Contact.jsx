@@ -50,6 +50,7 @@ export default function Contact() {
         <div className="contact-grid">
           {CONTACTS.map(({ label, value, href, Icon }) => {
             const isExternal = href.startsWith("http");
+            const ContactIcon = Icon;
             return (
               <a
                 key={label}
@@ -59,7 +60,7 @@ export default function Contact() {
                 className="contact-card"
               >
                 <span className="contact-icon" aria-hidden="true">
-                  <Icon size={22} />
+                  <ContactIcon size={22} />
                 </span>
                 <span className="contact-meta">
                   <span className="contact-label">{label}</span>

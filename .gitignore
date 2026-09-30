@@ -1,6 +1,7 @@
 data/
 ml/artifacts/
 backend/core/ml/models/*.pt
+!backend/core/ml/models/ambient_cnn.pt
 backend/core/ml/models/*.pth
 backend/core/ml/models/*.ckpt
 __pycache__/

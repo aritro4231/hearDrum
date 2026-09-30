@@ -1,87 +1,159 @@
-import { useEffect, useState } from "react";
-import { saveListeningSession } from "../api";
-import { useAuth } from "../auth/AuthContext";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  editListeningSessionSettings,
+  endListeningSession,
+  getCurrentListeningSession,
+  pauseListeningSession,
+  resumeListeningSession,
+  startListeningSession,
+} from "../api";
+import { useAuth } from "../auth/authStore";
 import "./Results.css";
 
+function readAmbientAnalysis() {
+  try {
+    return JSON.parse(localStorage.getItem("ambientAnalysis") || "null");
+  } catch {
+    return null;
+  }
+}
+
+function formatDuration(totalSeconds) {
+  const seconds = Math.max(0, Math.floor(totalSeconds || 0));
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const secs = seconds % 60;
+  return [hours, minutes, secs]
+    .map((part) => String(part).padStart(2, "0"))
+    .join(":");
+}
+
+function formatMinutes(seconds) {
+  const minutes = Math.round((seconds || 0) / 60);
+  return `${minutes} min`;
+}
+
+function formatPercent(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return "0%";
+  return `${number.toFixed(number >= 100 ? 0 : 1)}%`;
+}
+
+function formatConnection(value) {
+  return value === "bluetooth" ? "Bluetooth" : "Wired";
+}
+
+function getLiveDurationSeconds(session, nowMs) {
+  if (!session) return 0;
+  const accumulated = Number(session.accumulated_duration_seconds || 0);
+  if (session.status === "active" && session.last_resumed_at) {
+    const resumedAt = Date.parse(session.last_resumed_at);
+    if (Number.isFinite(resumedAt)) {
+      return Math.max(0, accumulated + (nowMs - resumedAt) / 1000);
+    }
+  }
+  return Number(session.actual_duration_seconds || accumulated || 0);
+}
+
+function getLiveExposurePercent(session, durationSeconds) {
+  const allowable = Number(session?.allowable_duration_seconds || 0);
+  if (allowable <= 0) return Number(session?.current_exposure_percent || 0);
+  return (durationSeconds / allowable) * 100;
+}
+
 export default function Results() {
-  const ALERT_KEY = "safeAlertedAt";
-  const END_KEY = "safeEndAt";
+  const navigate = useNavigate();
+  const { isAuthenticated, token } = useAuth();
   const volume = localStorage.getItem("listeningVolume");
   const estimatedDb = localStorage.getItem("estimatedDb");
   const listeningType = localStorage.getItem("listeningType");
   const modelData = JSON.parse(localStorage.getItem("selectedModel") || "null");
-  const { isAuthenticated, token } = useAuth();
+  const [ambientAnalysis] = useState(readAmbientAnalysis);
+  const [session, setSession] = useState(null);
+  const [completedSession, setCompletedSession] = useState(null);
+  const [today, setToday] = useState(null);
+  const [sessionBaselineExposure, setSessionBaselineExposure] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [statusMessage, setStatusMessage] = useState("");
+  const [error, setError] = useState("");
+  const [nowMs, setNowMs] = useState(Date.now());
 
   const volumeNumber = Number(volume);
   const dbNumber = Number(estimatedDb);
-  const safeMinutes = Math.round(480 * Math.pow(2, (85 - dbNumber) / 3));
-  const initialSeconds = Math.max(0, safeMinutes * 60);
-  const [remainingSeconds, setRemainingSeconds] = useState(initialSeconds);
-  const [saveStatus, setSaveStatus] = useState("");
+  const ambientUsed = Boolean(
+    ambientAnalysis?.analysis_used &&
+      ambientAnalysis?.environment_class &&
+      Number.isFinite(Number(ambientAnalysis?.confidence))
+  );
+
+  const applySessionResponse = (data) => {
+    if (data?.session) {
+      setSession(data.session);
+      setSessionBaselineExposure(Number(data.session.current_exposure_percent || 0));
+    }
+    if (data?.today) setToday(data.today);
+  };
 
   useEffect(() => {
-    if (!Number.isFinite(initialSeconds)) return;
-    setRemainingSeconds(initialSeconds);
-    const endAt = Date.now() + initialSeconds * 1000;
-    localStorage.setItem(END_KEY, String(endAt));
-    localStorage.removeItem(ALERT_KEY);
-  }, [initialSeconds]);
+    const timer = window.setInterval(() => setNowMs(Date.now()), 1000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   useEffect(() => {
-    if (!Number.isFinite(remainingSeconds) || remainingSeconds <= 0) return;
-    const timer = setInterval(() => {
-      setRemainingSeconds((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          localStorage.setItem(ALERT_KEY, String(Date.now()));
-          alert("Safe listening time reached. Please take a break.");
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [remainingSeconds]);
-
-  useEffect(() => {
-    if (
-      !isAuthenticated ||
-      !token ||
-      !modelData?.name ||
-      !listeningType ||
-      !Number.isFinite(volumeNumber) ||
-      !Number.isFinite(dbNumber) ||
-      !Number.isFinite(safeMinutes)
-    ) {
+    if (!isAuthenticated || !token) {
+      setLoading(false);
+      setError("Please log in before starting a listening session.");
       return;
     }
 
-    const saveKey = [
-      "savedSession",
-      modelData.name,
-      listeningType,
-      volumeNumber,
-      dbNumber,
-      safeMinutes,
-    ].join(":");
-
-    if (sessionStorage.getItem(saveKey) === "1") return;
+    if (
+      !modelData?.name ||
+      !listeningType ||
+      !Number.isFinite(volumeNumber) ||
+      !Number.isFinite(dbNumber)
+    ) {
+      setLoading(false);
+      setError("Missing setup data. Please go back and choose your settings.");
+      return;
+    }
 
     let isMounted = true;
 
     (async () => {
       try {
-        await saveListeningSession(token, {
+        setLoading(true);
+        const current = await getCurrentListeningSession(token);
+        if (!isMounted) return;
+
+        if (current.session) {
+          applySessionResponse(current);
+          setStatusMessage("Recovered your current listening session.");
+          return;
+        }
+
+        const started = await startListeningSession(token, {
           headphone_name: modelData.name,
           connection_type: listeningType,
           volume_percent: volumeNumber,
           estimated_db: dbNumber,
-          duration_minutes: Math.max(1, safeMinutes),
+          ambient_analysis_used: ambientUsed,
+          ambient_environment_class: ambientUsed
+            ? ambientAnalysis.environment_class
+            : null,
+          ambient_confidence: ambientUsed
+            ? Number(ambientAnalysis.confidence)
+            : null,
         });
-        sessionStorage.setItem(saveKey, "1");
-        if (isMounted) setSaveStatus("Saved to your account.");
-      } catch {
-        if (isMounted) setSaveStatus("Could not save this session.");
+        if (!isMounted) return;
+        applySessionResponse(started);
+        setStatusMessage(started.recovered ? "Recovered your current listening session." : "Session started.");
+      } catch (err) {
+        if (isMounted) {
+          setError(err.message || "Could not start a listening session.");
+        }
+      } finally {
+        if (isMounted) setLoading(false);
       }
     })();
 
@@ -89,52 +161,211 @@ export default function Results() {
       isMounted = false;
     };
   }, [
+    ambientAnalysis,
+    ambientUsed,
     dbNumber,
     isAuthenticated,
     listeningType,
     modelData?.name,
-    safeMinutes,
     token,
     volumeNumber,
   ]);
 
-  if (!Number.isFinite(volumeNumber) || !Number.isFinite(dbNumber)) {
+  const liveDurationSeconds = useMemo(
+    () => getLiveDurationSeconds(session, nowMs),
+    [nowMs, session]
+  );
+  const liveExposurePercent = useMemo(
+    () => getLiveExposurePercent(session, liveDurationSeconds),
+    [liveDurationSeconds, session]
+  );
+  const remainingSeconds = Math.max(
+    0,
+    Number(session?.allowable_duration_seconds || 0) - liveDurationSeconds
+  );
+  const todayExposure = Math.max(
+    0,
+    Number(today?.total_exposure_percent || 0) -
+      sessionBaselineExposure +
+      liveExposurePercent
+  );
+  const todayListeningSeconds = Math.max(
+    0,
+    Number(today?.total_listening_seconds || 0) -
+      Number(session?.actual_duration_seconds || 0) +
+      liveDurationSeconds
+  );
+
+  const runAction = async (action, successMessage) => {
+    if (!session?.id || !token) return;
+    setError("");
+    try {
+      const data = await action(token, session.id);
+      applySessionResponse(data);
+      setStatusMessage(successMessage);
+      return data;
+    } catch (err) {
+      setError(err.message || "Session action failed.");
+      return null;
+    }
+  };
+
+  const pause = () => runAction(pauseListeningSession, "Paused.");
+  const resume = () => runAction(resumeListeningSession, "Resumed.");
+
+  const end = async () => {
+    const data = await runAction(endListeningSession, "Session complete.");
+    if (data?.session) {
+      setCompletedSession(data.session);
+      setSession(data.session);
+    }
+  };
+
+  const editSettings = async () => {
+    const data = await runAction(
+      editListeningSessionSettings,
+      "Current session finalized. Update your settings."
+    );
+    if (data?.next_settings) {
+      localStorage.setItem("listeningVolume", String(data.next_settings.volume_percent));
+      localStorage.setItem("estimatedDb", String(data.next_settings.estimated_db));
+    }
+    if (data?.session) {
+      setCompletedSession(data.session);
+      navigate("/volume");
+    }
+  };
+
+  const startAnother = () => {
+    localStorage.removeItem("ambientAnalysis");
+    navigate("/ambient");
+  };
+
+  if (loading) {
+    return <p className="results-info">Starting your listening session...</p>;
+  }
+
+  if (error && !session) {
+    return <p className="results-info">{error}</p>;
+  }
+
+  if (!session) {
+    return <p className="results-info">No listening session is active.</p>;
+  }
+
+  if (completedSession || session.status === "completed") {
+    const finalSession = completedSession || session;
     return (
-      <p className="results-info">
-        Missing volume data. Please go back and set your volume.
-      </p>
+      <div className="results-container">
+        <h1 className="results-title">Session Complete</h1>
+
+        <div className="results-card">
+          <p className="results-card-label">Listened</p>
+          <p className="results-card-value">
+            {formatMinutes(finalSession.actual_duration_seconds)}
+          </p>
+        </div>
+
+        <div className="results-card results-grid-card">
+          <div>
+            <span>Session exposure</span>
+            <strong>{formatPercent(finalSession.exposure_percent)}</strong>
+          </div>
+          <div>
+            <span>Today's exposure</span>
+            <strong>{formatPercent(today?.total_exposure_percent)}</strong>
+          </div>
+        </div>
+
+        <div className="results-actions">
+          <button type="button" className="results-primary" onClick={startAnother}>
+            Start Another Session
+          </button>
+          <button
+            type="button"
+            className="results-secondary"
+            onClick={() => navigate("/dashboard")}
+          >
+            View My Sessions
+          </button>
+        </div>
+      </div>
     );
   }
 
-  const safeHours = Math.floor(remainingSeconds / 3600);
-  const safeMinsOnly = Math.floor((remainingSeconds % 3600) / 60);
-  const safeSecsOnly = remainingSeconds % 60;
+  const isPaused = session.status === "paused";
+  const environmentLabel = session.ambient_analysis_used
+    ? (session.ambient_environment_class || "").replaceAll("_", " ")
+    : "";
 
   return (
     <div className="results-container">
-      <h1 className="results-title">Your Safe Listening Results</h1>
+      <h1 className="results-title">Safe Listening Time</h1>
 
-      <p className="results-info">
-        Estimated Output: <b className="results-highlight">{dbNumber} dB SPL</b>
-      </p>
+      <div className="results-countdown-card">
+        <p className="results-session-state">{isPaused ? "Paused" : "Active"}</p>
+        <p className="results-countdown">{formatDuration(remainingSeconds)}</p>
+        <p className="results-card-label">remaining</p>
+      </div>
 
-      <p className="results-info">
-        Listening Volume: <b className="results-highlight">{volumeNumber}%</b>
-      </p>
-
-      <div className="results-card">
-        <p className="results-card-label">Safe Listening Time (NIOSH)</p>
-        <p className="results-card-value">
-          {safeHours > 0 ? `${safeHours}h ` : ""}
-          {safeMinsOnly}m {safeSecsOnly}s
+      <div className="results-card results-session-summary">
+        <p>
+          <b>{session.headphone?.name || modelData?.name}</b> •{" "}
+          {formatConnection(session.connection_type)}
         </p>
+        <p>Volume: {session.volume_percent}%</p>
+        <p>Estimated Output: {session.estimated_db} dB SPL</p>
+        {session.ambient_analysis_used && (
+          <p className="results-capitalize">Environment: {environmentLabel}</p>
+        )}
+      </div>
+
+      <div className="results-card results-grid-card">
+        <div>
+          <span>Today's Exposure</span>
+          <strong>{formatPercent(todayExposure)}</strong>
+        </div>
+        <div>
+          <span>Session Exposure</span>
+          <strong>{formatPercent(liveExposurePercent)}</strong>
+        </div>
+        <div>
+          <span>Actual Listening</span>
+          <strong>{formatDuration(liveDurationSeconds)}</strong>
+        </div>
+        <div>
+          <span>Today Listened</span>
+          <strong>{formatMinutes(todayListeningSeconds)}</strong>
+        </div>
       </div>
 
       <p className="results-footnote">
-        Based on NIOSH Recommended Exposure Limit: 85 dB = 8 hours, every +3 dB halves time.
+        Exposure uses the existing NIOSH estimate: actual listening time divided by
+        allowable time at the estimated sound level. Paused time is not counted.
       </p>
 
-      {saveStatus && <p className="results-save-status">{saveStatus}</p>}
+      {statusMessage && <p className="results-save-status">{statusMessage}</p>}
+      {error && <p className="results-error">{error}</p>}
+
+      <div className="results-actions">
+        {isPaused ? (
+          <button type="button" className="results-primary" onClick={resume}>
+            Resume
+          </button>
+        ) : (
+          <button type="button" className="results-primary" onClick={pause}>
+            Pause
+          </button>
+        )}
+
+        <button type="button" className="results-secondary" onClick={editSettings}>
+          Edit Settings
+        </button>
+
+        <button type="button" className="results-secondary" onClick={end}>
+          End Session
+        </button>
+      </div>
     </div>
   );
 }
