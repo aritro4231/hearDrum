@@ -23,7 +23,7 @@ export default function AboutUs() {
 
         <div className="about-right">
           <div className="about-name">Aritro Sengupta</div>
-          <div className="about-subtitle">Computer Science Junior at Virginia Tech</div>
+          <div className="about-subtitle">Computer Science Senior at Virginia Tech</div>
 
           <p className="about-lead">
             I built HearDrum to solve a gap: most headphone brands, especially beyond Apple phones do not warn you when you exceed safe listening levels.
