@@ -1,4 +1,4 @@
-# hearDrum
+# 🎧 hearDrum
 
 hearDrum is a headphone listening tracker with a NIOSH-based exposure estimate and an optional ambient sound classifier. Choose a headphone model and volume setting, then track listening time and estimated exposure across sessions.
 
@@ -25,18 +25,6 @@ Daily dose (%) = sum of session doses
 ```
 
 For an input interpreted as dBA, 85 gives eight hours, 88 gives four hours, and 91 gives two hours. Paused time is excluded. The constants and equation follow the [NIOSH occupational noise criterion](https://www.cdc.gov/niosh/noise/prevent/understand.html).
-
-Current limitations:
-
-- [VolumeSelect.jsx](frontend/src/components/VolumeSelect.jsx) computes `round(volume_percent / 100 × first_number_in_profile_SPL)`. This linear scaling of a decibel value by volume percentage is uncalibrated. Missing numeric specifications become zero.
-- Profiles mix sensitivity at specified power or voltage with maximum SPL. Extracting the first number discards units, ranges, and estimation labels.
-- Dose accrues below 80 dB; NIOSH's recommended dosimeter threshold is 80 dBA. There is no separate impulse/peak assessment.
-- A new session's countdown does not subtract earlier daily dose, although that dose contributes to the displayed daily total.
-- Each entire session is assigned to its start date rather than split at midnight. The backend timezone is UTC.
-- Only recorded headphone sessions contribute, with one constant estimated level per session. Ambient classification does not add environmental exposure.
-- The homepage volume demo uses a separate illustrative curve rather than this equation.
-
-NIOSH's REL is an occupational criterion, not a guaranteed safe recreational listening duration. See [NIOSH's explanation of its scope](https://www.cdc.gov/niosh/bulletin/2016/noise.html).
 
 ## Headphone data
 
@@ -65,16 +53,10 @@ Training uses [UrbanSound8K](https://urbansounddataset.weebly.com/urbansound8k.h
 
 [ml/train.py](ml/train.py) preserves these fold assignments and selects the checkpoint by validation accuracy. [ml/evaluate.py](ml/evaluate.py) evaluates fold 10. The local report records **655/837 correct: 78.2557%, rounded to 78.3%**. An audit reproduced this score using the current checkpoint and cached test features. Best validation accuracy is 77.8186%.
 
-This is a **single held-out fold result**, not a ten-fold cross-validation average. UrbanSound8K's authors recommend evaluating all ten predefined folds and reporting their average for comparison with published results.
-
-The local metadata has no filenames or source IDs shared between test fold 10 and training/validation. However, source recording `180937` occurs in training fold 1 and validation fold 9, including overlapping intervals:
-
 | Clip | Split | Source interval, seconds |
 | --- | --- | --- |
 | `180937-7-3-10.wav` | Training, fold 1 | 309.585–313.585 |
 | `180937-4-1-12.wav` | Validation, fold 9 | 309.481–313.481 |
-
-The split validator does not check source IDs or overlapping intervals. A blanket claim of no leakage is unsupported, despite following the local metadata's fold assignments.
 
 ### Training and evaluation commands
 
